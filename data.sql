@@ -13,16 +13,16 @@ INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight_kg)
 VALUES ('Devimon','2017-5-12',5,true,11);
 
 INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight_kg)
-VALUES ('Charmander','2020-2-8',0,false,11);
+VALUES ('Charmander','2020-2-8',0,false,-11);
 
 INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight_kg)
-VALUES ('Plantmon','2021-11-15',2,true,5.7);
+VALUES ('Plantmon','2021-11-15',2,true,-5.7);
 
 INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight_kg)
-VALUES ('Squirtle','1993-4-2',3,false,12.13);
+VALUES ('Squirtle','1993-4-2',3,false,-12.13);
 
 INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight_kg)
-VALUES ('Angemon','2005-6-12',1,true,45);
+VALUES ('Angemon','2005-6-12',1,true,-45);
 
 INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight_kg)
 VALUES ('Boarmon','2005-6-7',7,true,20.4);
@@ -38,13 +38,7 @@ BEGIN;
 UPDATE animals
 SET species = 'unspecified';
 
-/*check if the update is done*/
-SELECT * FROM animals;
-
 ROLLBACK;
-
-/*check if the update is removed done*/
-SELECT * FROM animals;
 
 BEGIN;
 
@@ -57,5 +51,27 @@ SET species = 'pokemon'
 WHERE species IS NULL;
 
 COMMIT;
-/*check if the update is done*/
-SELECT * FROM animals;
+
+BEGIN;
+
+DELETE FROM animals;
+
+ROLLBACK;
+
+BEGIN;
+
+DELETE FROM animals
+WHERE date_of_birth >= '2022-1-1';
+
+SAVEPOINT delete_pet;
+
+UPDATE animals
+SET weight_kg = weight_kg * -1;
+
+ROLLBACK TO delete_pet;
+
+UPDATE animals
+SET weight_kg = weight_kg * -1
+WHERE weight_kg < 0;
+
+COMMIT;
