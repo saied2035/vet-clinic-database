@@ -32,3 +32,30 @@ VALUES ('Blossom','1998-10-13',3,true,17);
 
 INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight_kg)
 VALUES ('Ditto','2022-5-14',4,true,22);
+
+BEGIN;
+
+UPDATE animals
+SET species = 'unspecified';
+
+/*check if the update is done*/
+SELECT * FROM animals;
+
+ROLLBACK;
+
+/*check if the update is removed done*/
+SELECT * FROM animals;
+
+BEGIN;
+
+UPDATE animals
+SET species = 'digimon'
+WHERE name LIKE '%mon%';
+
+UPDATE animals
+SET species = 'pokemon'
+WHERE species IS NULL;
+
+COMMIT;
+/*check if the update is done*/
+SELECT * FROM animals;
