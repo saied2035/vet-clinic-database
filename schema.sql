@@ -37,4 +37,23 @@ ON DELETE CASCADE;
 ALTER TABLE animals
 ADD COLUMN owner_id INT,
 ADD FOREIGN KEY (owner_id) REFERENCES owners (id)
-ON DELETE CASCADE;
+ON DELETE DEFAULT;
+
+CREATE TABLE vets (
+ id INT GENERATED ALWAYS AS IDENTITY,
+ name varchar(100) NOT NULL,
+ age SMALLINT NOT NULL,
+ date_of_graduation DATE NOT NULL,
+ PRIMARY KEY (id)
+);
+
+CREATE TABLE specializations (
+ vet_id INT REFERENCES vets(id) NOT NULL,
+ species_id INT REFERENCES species(id) NOT NULL    
+);
+
+CREATE TABLE visits (
+ vet_id INT REFERENCES vets(id) NOT NULL,
+ animal_id INT REFERENCES animals(id) NOT NULL,
+ visit_date DATE NOT NULL    
+);
