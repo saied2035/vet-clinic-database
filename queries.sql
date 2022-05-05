@@ -27,6 +27,49 @@ SELECT species,MIN(weight_kg),MAX(weight_kg) FROM animals GROUP BY species;
 SELECT species, AVG(escape_attempts) FROM animals WHERE date_of_birth >= '1990-1-1' 
 AND date_of_birth <= '2000-12-31' GROUP BY species;
 
+BEGIN;
+
+UPDATE animals
+SET species = 'unspecified';
+
+ROLLBACK;
+
+BEGIN;
+
+UPDATE animals
+SET species = 'digimon'
+WHERE name LIKE '%mon';
+
+UPDATE animals
+SET species = 'pokemon'
+WHERE species IS NULL;
+
+COMMIT;
+
+BEGIN;
+
+DELETE FROM animals;
+
+ROLLBACK;
+
+BEGIN;
+
+DELETE FROM animals
+WHERE date_of_birth >= '2022-1-1';
+
+SAVEPOINT delete_pet;
+
+UPDATE animals
+SET weight_kg = weight_kg * -1;
+
+ROLLBACK TO delete_pet;
+
+UPDATE animals
+SET weight_kg = weight_kg * -1
+WHERE weight_kg < 0;
+
+COMMIT;
+
 SELECT name FROM owners JOIN animals ON owners.id= animals.owner_id WHERE full_name='Melody Pond';
 
 SELECT animals.name FROM species JOIN animals ON  species.id = animals.species_id WHERE species.name = 'Pokemon';

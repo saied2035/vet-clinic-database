@@ -33,49 +33,6 @@ VALUES ('Blossom','1998-10-13',3,true,17);
 INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight_kg)
 VALUES ('Ditto','2022-5-14',4,true,22);
 
-BEGIN;
-
-UPDATE animals
-SET species = 'unspecified';
-
-ROLLBACK;
-
-BEGIN;
-
-UPDATE animals
-SET species = 'digimon'
-WHERE name LIKE '%mon';
-
-UPDATE animals
-SET species = 'pokemon'
-WHERE species IS NULL;
-
-COMMIT;
-
-BEGIN;
-
-DELETE FROM animals;
-
-ROLLBACK;
-
-BEGIN;
-
-DELETE FROM animals
-WHERE date_of_birth >= '2022-1-1';
-
-SAVEPOINT delete_pet;
-
-UPDATE animals
-SET weight_kg = weight_kg * -1;
-
-ROLLBACK TO delete_pet;
-
-UPDATE animals
-SET weight_kg = weight_kg * -1
-WHERE weight_kg < 0;
-
-COMMIT;
-
 /*owners table*/
 
 INSERT INTO owners(full_name,age)
@@ -131,3 +88,31 @@ WHERE name LIKE '%mon';
 UPDATE animals
 SET species_id = 1
 WHERE species_id IS NULL;
+
+/*vets table*/
+
+INSERT INTO vets(name,age,date_of_graduation)
+VALUES ('William Tatcher',45,'2000-4-23');
+
+INSERT INTO vets(name,age,date_of_graduation)
+VALUES ('Maisy Smith',26,'2019-1-17');
+
+INSERT INTO vets(name,age,date_of_graduation)
+VALUES ('Stephanie Mendez',64,'1981-5-4');
+
+INSERT INTO vets(name,age,date_of_graduation)
+VALUES ('Jack Harkness',38,'2008-6-8');
+
+/*specializations table*/
+
+INSERT INTO specializations(vet_id,species_id)
+VALUES (1,1);
+
+INSERT INTO specializations(vet_id,species_id)
+VALUES (3,1);
+
+INSERT INTO specializations(vet_id,species_id)
+VALUES (3,2);
+
+INSERT INTO specializations(vet_id,species_id)
+VALUES (4,2);
