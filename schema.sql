@@ -42,7 +42,7 @@ ON DELETE DEFAULT;
 CREATE TABLE vets (
  id INT GENERATED ALWAYS AS IDENTITY,
  name varchar(100) NOT NULL,
- age SMALLINT NOT NULL,
+ age SMALLINT,
  date_of_graduation DATE NOT NULL,
  PRIMARY KEY (id)
 );
@@ -57,3 +57,7 @@ CREATE TABLE visits (
  animal_id INT REFERENCES animals(id) NOT NULL,
  visit_date DATE NOT NULL    
 );
+
+/*performance project*/
+
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
