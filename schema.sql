@@ -61,3 +61,5 @@ CREATE TABLE visits (
 /*performance project*/
 
 ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+CREATE INDEX animal_id_asc ON visits (animal_id ASC);
