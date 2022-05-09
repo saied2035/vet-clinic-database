@@ -144,3 +144,7 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM visits WHERE animal_id = 4;
 \d visits;
 
 EXPLAIN ANALYZE SELECT * FROM visits where vet_id = 2;
+
+\d owners;
+
+EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
