@@ -13,6 +13,9 @@ This repository includes files with plain SQL that can be used to recreate a dat
 - [queries.sql](./queries.sql) for examples of queries that can be run on a newly created database.
 
 
+## Database Diagram
+![digram of the database](https://user-images.githubusercontent.com/70805060/167635346-42a81415-f421-4cc1-bccf-ba1847025ed1.png)
+
 ## Authors
 
 👤 **Author1**
